@@ -6,6 +6,7 @@ using Ocdata.Operations.Cache;
 using Ocdata.Operations.Cache.Redis;
 using Ocdata.Operations.Entities;
 using Ocdata.Operations.Helpers.RestHelper;
+using Ocdata.Operations.Middlewares;
 using Ocdata.Operations.Repositories;
 using Ocdata.Operations.Repositories.Contracts;
 using System.Reflection;
@@ -20,6 +21,7 @@ namespace Ocdata.Operations.Ioc
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddTransient<ExceptionHandlingMiddleware>();
 
             services.AddScoped<IRestClientHelper, RestClientHelper>();
             services.AddSingleton<RedisServer>();
