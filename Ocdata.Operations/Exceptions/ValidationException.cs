@@ -5,7 +5,7 @@ namespace Ocdata.Operations.Exceptions
     public class ValidationException : ApplicationException
     {
         public ValidationException()
-            : base("One or more validation failures have occurred.")
+            : base("Validation Failure", "One or more validation errors occurred")
         {
             Errors = new Dictionary<string, string[]>();
         }

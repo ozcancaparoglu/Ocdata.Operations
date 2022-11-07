@@ -1,9 +1,9 @@
 ﻿namespace Ocdata.Operations.Exceptions
 {
-    public class NotFoundException : ApplicationException
+    public abstract class NotFoundException : ApplicationException
     {
-        public NotFoundException(string name, object key)
-            : base($"Entity \"{name}\" ({key}) was not found.")
+        protected NotFoundException(string message)
+            : base("Not Found", message)
         {
         }
     }

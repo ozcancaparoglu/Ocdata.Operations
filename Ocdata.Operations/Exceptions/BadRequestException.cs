@@ -1,4 +1,4 @@
-﻿namespace Ocdata.Operations.Helpers.ExceptionHelper
+﻿namespace Ocdata.Operations.Exceptions
 {
     public abstract class BadRequestException : ApplicationException
     {

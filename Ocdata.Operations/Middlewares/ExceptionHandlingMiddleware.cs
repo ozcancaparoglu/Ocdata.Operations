@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Ocdata.Operations.Helpers.ExceptionHelper;
+using Ocdata.Operations.Exceptions;
 using System.Text.Json;
-using ApplicationException = Ocdata.Operations.Helpers.ExceptionHelper.ApplicationException;
+using ApplicationException = Ocdata.Operations.Exceptions.ApplicationException;
 
 namespace Ocdata.Operations.Middlewares
 {
