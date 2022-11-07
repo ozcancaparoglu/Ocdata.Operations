@@ -2,6 +2,8 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Ocdata.Operations.Behaviours;
+using Ocdata.Operations.Cache;
+using Ocdata.Operations.Cache.Redis;
 using Ocdata.Operations.Entities;
 using Ocdata.Operations.Helpers.RestHelper;
 using Ocdata.Operations.Repositories;
@@ -15,12 +17,13 @@ namespace Ocdata.Operations.Ioc
         public static IServiceCollection OcdataServices(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
+
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-            
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
             services.AddScoped<IRestClientHelper, RestClientHelper>();
+            services.AddSingleton<RedisServer>();
+            services.AddScoped<ICacheService, RedisCacheService>();
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
