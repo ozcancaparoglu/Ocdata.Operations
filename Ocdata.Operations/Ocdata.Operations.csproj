@@ -9,7 +9,7 @@
     <Description>Source Code : https://github.com/ozcancaparoglu/Ocdata.Operations
 
 Example Project : https://github.com/ozcancaparoglu/Marketplace</Description>
-    <Version>1.1.0</Version>
+    <Version>1.1.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
