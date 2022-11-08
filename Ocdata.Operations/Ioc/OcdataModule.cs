@@ -25,7 +25,7 @@ namespace Ocdata.Operations.Ioc
             services.AddTransient<ExceptionHandlingMiddleware>();
 
             services.AddScoped<IRestClientHelper, RestClientHelper>();
-            services.AddSingleton<RedisServer>();
+            services.AddScoped<RedisServer>();
             services.AddScoped<ICacheService, RedisCacheService>();
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));
