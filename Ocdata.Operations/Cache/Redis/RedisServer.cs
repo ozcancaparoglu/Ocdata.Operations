@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Options;
 using StackExchange.Redis;
 using IDatabase = StackExchange.Redis.IDatabase;
 
@@ -7,15 +7,18 @@ namespace Ocdata.Operations.Cache.Redis
     public class RedisServer
     {
         private readonly ConnectionMultiplexer _connectionMultiplexer;
+        private readonly RedisConfigurationOptions _configuration;
         private readonly IDatabase _database;
+
         private string configurationString;
         private readonly int _currentDatabaseId = 0;
-
-        public RedisServer(IConfiguration configuration)
+        
+        public RedisServer(IOptions<RedisConfigurationOptions> options)
         {
-            CreateRedisConfigurationString(configuration);
+            _configuration = options.Value;
+            CreateRedisConfigurationString();
 
-            _connectionMultiplexer = ConnectionMultiplexer.Connect(configurationString);
+            _connectionMultiplexer = ConnectionMultiplexer.Connect(configuration: configurationString);
             _database = _connectionMultiplexer.GetDatabase(_currentDatabaseId);
         }
 
@@ -26,12 +29,9 @@ namespace Ocdata.Operations.Cache.Redis
             _connectionMultiplexer.GetServer(configurationString).FlushDatabase(_currentDatabaseId);
         }
 
-        private void CreateRedisConfigurationString(IConfiguration configuration)
+        private void CreateRedisConfigurationString()
         {
-            string host = configuration.GetSection("RedisConfiguration:Host").Value;
-            string port = configuration.GetSection("RedisConfiguration:Port").Value;
-
-            configurationString = $"{host}:{port}";
+            configurationString = $"{_configuration.Host}:{_configuration.Port}";
         }
     }
 }
