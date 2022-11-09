@@ -18,8 +18,6 @@ namespace Ocdata.Operations.Ioc
     {
         public static IServiceCollection OcdataServices(this IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient<ExceptionHandlingMiddleware>();
@@ -27,6 +25,7 @@ namespace Ocdata.Operations.Ioc
             services.AddScoped<IRestClientHelper, RestClientHelper>();
             services.AddScoped<RedisConfigurationOptions>();
             services.AddScoped<RedisServer>();
+            services.AddScoped<RedisConfigurationOptions>();
             services.AddScoped<ICacheService, RedisCacheService>();
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));

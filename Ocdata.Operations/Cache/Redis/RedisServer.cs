@@ -31,7 +31,7 @@ namespace Ocdata.Operations.Cache.Redis
 
         private void CreateRedisConfigurationString()
         {
-            configurationString = $"{_configuration.Host}:{_configuration.Port}";
+            configurationString = $"{_configuration.Host}:{_configuration.Port},{_configuration.Admin}";
         }
     }
 }
