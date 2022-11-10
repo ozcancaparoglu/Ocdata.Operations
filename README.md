@@ -19,7 +19,9 @@
 - UnitOfWork, GenericRepository, AutoMapper and CacheService
 
 `IUnitOfWork _unitOfWork;
+
 IMapper _mapper;
+
 ICacheService _cacheService;`
 
 - For Redis usage you should use RedisConfigurationOptions
