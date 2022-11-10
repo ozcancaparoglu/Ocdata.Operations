@@ -25,9 +25,8 @@
  - UnitOfWork : `IUnitOfWork _unitOfWork`
  - GenericRepository : `await _unitOfWork.Repository<Category>().Find(x => x.Name.ToUpperInvariant());`
  - CacheManager `ICacheService _cacheService`
- 
- `_cacheService.TryGetValue(CacheConstants.CategoryCacheKey, out _allCategories)`
- `_cacheService.Add(CacheConstants.CategoryCacheKey, AllCategories, CacheConstants.CategoryCacheTime);`
+`_cacheService.TryGetValue(CacheConstants.CategoryCacheKey, out _allCategories)`
+`_cacheService.Add(CacheConstants.CategoryCacheKey, AllCategories, CacheConstants.CategoryCacheTime);`
 
 
 
