@@ -6,19 +6,19 @@
 
 ## Usage
 
-In Program.cs add
+#### In Program.cs add
 
 `builder.Services.OcdataServices();`
 
-* Register your context with DbContext in your modules or in Program.cs
+#### Register your context with DbContext in your modules or in Program.cs
 
 `services.AddScoped<DbContext, YourContext>(); `
 
-* For Redis usage you should use RedisConfigurationOptions
+#### For Redis usage you should use RedisConfigurationOptions
 
 `services.Configure<RedisConfigurationOptions>(configuration.GetSection("RedisDatabase"));`
 
-appsettings.json configuration
+##### appsettings.json configuration
 
 `"RedisDatabase": {
     "Host": "localhost",
