@@ -1,7 +1,9 @@
 # Ocdata.Operations
 
 > Project For Common Data Operations (.NET 6.0)
+
 > Nuget Package : Install-Package Ocdata.Operations -Version 1.1.7
+
 > Example usage project : https://github.com/ozcancaparoglu/Marketplace.git
 
 ## Usage
