@@ -22,17 +22,16 @@
 
  appsettings.json configuration: `"RedisDatabase": {"Host": "localhost","Port": "6379","Admin": "allowAdmin=true"},`
  
- - UnitOfWork `IUnitOfWork`
+ - UnitOfWork : `IUnitOfWork`
  - GenericRepository `await _unitOfWork.Repository<Category>().Find(x => x.Name.ToUpperInvariant() == dto.Name.ToUpperInvariant() 
  && x.DisplayName.ToUpperInvariant() == dto.DisplayName.ToUpperInvariant());`
- - CacheManager `ICacheService`
- `if (!_cacheService.TryGetValue(CacheConstants.CategoryCacheKey, out _allCategories))
-            {
-                AllCategories = (List<Category>)await _unitOfWork.Repository<Category>().GetAll();
-                _cacheService.Add(CacheConstants.CategoryCacheKey, AllCategories, CacheConstants.CategoryCacheTime);
-            }
-
-            return AllCategories;`
+ - CacheManager `ICacheService
+ if (!_cacheService.TryGetValue(CacheConstants.CategoryCacheKey, out _allCategories))
+ {
+     AllCategories = (List<Category>)await _unitOfWork.Repository<Category>().GetAll();
+     _cacheService.Add(CacheConstants.CategoryCacheKey, AllCategories, CacheConstants.CategoryCacheTime);
+ }
+ return AllCategories;`
 
 
 
