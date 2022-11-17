@@ -10,7 +10,7 @@ namespace Ocdata.Operations.Repositories.Contracts
         Task BulkInsert(IList<T> entities);
         Task BulkUpdate(IList<T> entities);
         Task<int> Count();
-        Task<int> CountExpression(Expression<Func<T, bool>> predicate, bool isActive = true);
+        Task<int> CountExpression(Expression<Func<T, bool>> predicate);
         Task<ICollection<T>> Filter(Expression<Func<T, bool>> match);
         Task<ICollection<T>> FilterWithProperties(Expression<Func<T, bool>>? filter = null,
            string includeProperties = "", Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
@@ -22,5 +22,6 @@ namespace Ocdata.Operations.Repositories.Contracts
         IQueryable<T> Table();
         T Update(T entity);
         void Delete(T entity);
+        Task<int> ExecuteCommand(string sql, params object[] parameters);
     }
 }

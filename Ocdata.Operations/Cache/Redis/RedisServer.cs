@@ -9,16 +9,13 @@ namespace Ocdata.Operations.Cache.Redis
         private readonly ConnectionMultiplexer _connectionMultiplexer;
         private readonly RedisConfigurationOptions _configuration;
         private readonly IDatabase _database;
-
-        private string configurationString;
         private readonly int _currentDatabaseId = 0;
         
         public RedisServer(IOptions<RedisConfigurationOptions> options)
         {
             _configuration = options.Value;
-            CreateRedisConfigurationString();
 
-            _connectionMultiplexer = ConnectionMultiplexer.Connect(configuration: configurationString);
+            _connectionMultiplexer = ConnectionMultiplexer.Connect($"{_configuration.Host}:{_configuration.Port},{_configuration.Admin}");
             _database = _connectionMultiplexer.GetDatabase(_currentDatabaseId);
         }
 
@@ -26,12 +23,7 @@ namespace Ocdata.Operations.Cache.Redis
 
         public void FlushDatabase()
         {
-            _connectionMultiplexer.GetServer(configurationString).FlushDatabase(_currentDatabaseId);
-        }
-
-        private void CreateRedisConfigurationString()
-        {
-            configurationString = $"{_configuration.Host}:{_configuration.Port},{_configuration.Admin}";
+            _connectionMultiplexer.GetServer($"{_configuration.Host}:{_configuration.Port}").FlushDatabase(_currentDatabaseId);
         }
     }
 }

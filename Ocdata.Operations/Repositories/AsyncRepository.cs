@@ -15,6 +15,8 @@ namespace Ocdata.Operations.Repositories
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
+        public virtual async Task<int> ExecuteCommand(string sql, params object[] parameters) => await _dbContext.Database.ExecuteSqlRawAsync(sql, parameters);
+
         public virtual IQueryable<T> Table() => _dbContext.Set<T>().AsQueryable();
 
         public virtual async Task<ICollection<T>> GetAll() => await _dbContext.Set<T>().ToListAsync();
@@ -69,7 +71,7 @@ namespace Ocdata.Operations.Repositories
 
         public virtual async Task<int> Count() => await _dbContext.Set<T>().CountAsync();
 
-        public virtual async Task<int> CountExpression(Expression<Func<T, bool>> predicate, bool isActive = true) => await _dbContext.Set<T>().Where(predicate).CountAsync();
+        public virtual async Task<int> CountExpression(Expression<Func<T, bool>> predicate) => await _dbContext.Set<T>().Where(predicate).CountAsync();
 
         public virtual async Task BulkUpdate(IList<T> entities) => await _dbContext.BulkInsertOrUpdateAsync(entities);
 
