@@ -11,7 +11,7 @@ namespace Ocdata.Operations.Repositories.Contracts
         Task BulkUpdate(IList<T> entities);
         Task<int> Count();
         Task<int> CountExpression(Expression<Func<T, bool>> predicate);
-        Task<ICollection<T>> Filter(Expression<Func<T, bool>> match);
+        Task<ICollection<T>> Filter(Expression<Func<T, bool>> filter, int? page = null, int? pageSize = null);
         Task<ICollection<T>> FilterWithProperties(Expression<Func<T, bool>>? filter = null,
            string includeProperties = "", Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
            int? page = null, int? pageSize = null);

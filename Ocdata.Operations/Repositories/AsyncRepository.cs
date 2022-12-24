@@ -38,7 +38,17 @@ namespace Ocdata.Operations.Repositories
             return await query.SingleOrDefaultAsync();
         }
 
-        public virtual async Task<ICollection<T>> Filter(Expression<Func<T, bool>> match) => await _dbContext.Set<T>().Where(match).ToListAsync();
+        public virtual async Task<ICollection<T>> Filter(Expression<Func<T, bool>> filter, int? page = null, int? pageSize = null)
+        {
+            IQueryable<T> query = _dbContext.Set<T>();
+
+            query = query.Where(filter);
+
+            if (page != null && pageSize != null)
+                query = query.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value);
+
+            return await query.ToListAsync();
+        }
 
         public virtual async Task<ICollection<T>> FilterWithProperties(Expression<Func<T, bool>>? filter = null,
            string includeProperties = "", Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
